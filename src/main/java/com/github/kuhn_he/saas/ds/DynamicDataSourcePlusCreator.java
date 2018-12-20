@@ -9,11 +9,13 @@ import com.baomidou.dynamic.datasource.DynamicDataSourceCreator;
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties;
 
-@Component
 public class DynamicDataSourcePlusCreator{
 
-	@Autowired
-	 private DynamicDataSourceProperties properties;
+	private DynamicDataSourceProperties properties;
+	
+	public DynamicDataSourcePlusCreator(DynamicDataSourceProperties properties){
+		this.properties=properties;
+	}
 	
 	/**
      * 创建DRUID数据源
