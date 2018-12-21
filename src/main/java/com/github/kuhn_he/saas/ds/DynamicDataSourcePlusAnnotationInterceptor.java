@@ -58,7 +58,9 @@ public class DynamicDataSourcePlusAnnotationInterceptor implements MethodInterce
                 DynamicDataSourceContextHolder.setDataSourceLookupKey(dbKey);
         	}
             return invocation.proceed();
-        } finally {
+        } catch(Exception e){
+        	return invocation.proceed();
+        }finally {
             DynamicDataSourceContextHolder.clearDataSourceLookupKey();
         }
     }
