@@ -49,16 +49,17 @@ public class DynamicDataSourcePlusAnnotationInterceptor implements MethodInterce
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         try {
-        	String headerKey=determineDatasource(invocation);
+        	String dsKeyName=determineDatasource(invocation);
         	HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        	String dbKey=request.getHeader(headerKey);
+        	String dsKey=StringUtils.isNotBlank(request.getHeader(dsKeyName))?request.getHeader(dsKeyName):(String)request.getSession().getAttribute(dsKeyName);
         	
-        	if(StringUtils.isNotBlank(dbKey)){
-        		switchDatasource(dbKey);
-                DynamicDataSourceContextHolder.setDataSourceLookupKey(dbKey);
+        	if(StringUtils.isNotBlank(dsKey)){
+        		switchDatasource(dsKey);
+                DynamicDataSourceContextHolder.setDataSourceLookupKey(dsKey);
         	}
             return invocation.proceed();
         } catch(Exception e){
+        	e.printStackTrace();
         	return invocation.proceed();
         }finally {
             DynamicDataSourceContextHolder.clearDataSourceLookupKey();
@@ -85,14 +86,14 @@ public class DynamicDataSourcePlusAnnotationInterceptor implements MethodInterce
      * @param dbKey
      * @throws Throwable
      */
-    private void switchDatasource(String dbKey) {
+    private void switchDatasource(String dsKey) {
     	Map<String,DataSource> dsMap=dynamicRoutingDataSource.getCurrentDataSources();
-    	if(dsMap!=null && dsMap.containsKey(dbKey)){
+    	if(dsMap!=null && dsMap.containsKey(dsKey)){
     		return;
     	}
     	
     	//生成数据源
-    	DataSource ds=dynamicDataSourceProvider.createDataSource(dbKey);
-    	dynamicRoutingDataSource.addDataSource(dbKey, ds);;
+    	DataSource ds=dynamicDataSourceProvider.createDataSource(dsKey);
+    	dynamicRoutingDataSource.addDataSource(dsKey, ds);;
     }
 }
