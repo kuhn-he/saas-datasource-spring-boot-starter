@@ -9,7 +9,7 @@ spring boot starter for Software-as-a-Service datasource base on mybatis-plus(ht
 <dependency>
     <groupId>com.github.kuhn-he</groupId>
     <artifactId>saas-datasource-spring-boot-starter</artifactId>
-    <version>3.0.6.2</version>
+    <version>3.0.6.3</version>
 </dependency>
 ```
 
