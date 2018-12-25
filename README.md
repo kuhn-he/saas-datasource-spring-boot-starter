@@ -5,7 +5,7 @@ spring boot starter for Software-as-a-Service datasource base on mybatis-plus(ht
 
 + add Dependencies:
 
-```
+```xml
 <dependency>
     <groupId>com.github.kuhn-he</groupId>
     <artifactId>saas-datasource-spring-boot-starter</artifactId>
@@ -51,21 +51,21 @@ public class SampleDynamicDataSourceProvider implements DynamicDataSourcePlusPro
 
 + then add @EnableDynamicRouteDataSource on Spring Boot Application, indicates that saas is enabled.
 
-```
+```java
 @SpringBootApplication
 @EnableDynamicRouteDataSource
 public class ApplicationBootstrap {
-//...
+ //...
 }
 ```
 
 + code your database Mapper, add @SAAS(import com.github.kuhn_he.mapper.SAAS) on your Mapper interface(non-annotation @SAAS is default datasource which is saas datasouce configuration in application.properties).
 
-```
+```java
 @SAAS //default is x-datasource-key
 @Mapper
 public interface SampleMapper extends BaseMapper<TSample>{
-//...
+ //...
 }
 ```
 
