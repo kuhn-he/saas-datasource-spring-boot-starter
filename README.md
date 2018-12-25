@@ -64,7 +64,7 @@ public class ApplicationBootstrap {
 ```java
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-@SAAS //default is x-datasource-key
+@SAAS //default is x-datasource-key which datasource key put in header or session. 
 @Mapper
 public interface SampleMapper extends BaseMapper<TSample>{
  //...
