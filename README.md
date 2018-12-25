@@ -52,6 +52,8 @@ public class SampleDynamicDataSourceProvider implements DynamicDataSourcePlusPro
 + then add @EnableDynamicRouteDataSource on Spring Boot Application, indicates that saas is enabled.
 
 ```java
+import com.github.kuhn_he.saas.ds.annotation.EnableDynamicRouteDataSource;
+
 @SpringBootApplication
 @EnableDynamicRouteDataSource
 public class ApplicationBootstrap {
