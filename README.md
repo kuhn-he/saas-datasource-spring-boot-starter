@@ -62,6 +62,8 @@ public class ApplicationBootstrap {
 + code your database Mapper, add @SAAS(import com.github.kuhn_he.mapper.SAAS) on your Mapper interface(non-annotation @SAAS is default datasource which is saas datasouce configuration in application.properties).
 
 ```java
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 @SAAS //default is x-datasource-key
 @Mapper
 public interface SampleMapper extends BaseMapper<TSample>{
